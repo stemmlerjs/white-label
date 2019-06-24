@@ -1,8 +1,8 @@
 
 import { MockJobCreatedEvent } from "../events/mockJobCreatedEvent";
 import { MockJobDeletedEvent } from "../events/mockJobDeletedEvent";
-import { IHandle } from "../../../../../core/events/IHandle";
-import { DomainEvents } from "../../../../../core/events/DomainEvents";
+import { IHandle } from "../../../IHandle";
+import { DomainEvents } from "../../../DomainEvents";
 
 export class MockPostToSocial implements IHandle<MockJobCreatedEvent>, IHandle<MockJobDeletedEvent> {
   constructor () {

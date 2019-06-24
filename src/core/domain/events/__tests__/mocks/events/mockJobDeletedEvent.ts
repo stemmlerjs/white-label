@@ -1,5 +1,5 @@
 
-import { IDomainEvent } from "../../../../../core/events/IDomainEvent";
+import { IDomainEvent } from "../../../IDomainEvent";
 import { UniqueEntityID } from "../../../../UniqueEntityID";
 
 export class MockJobDeletedEvent implements IDomainEvent {

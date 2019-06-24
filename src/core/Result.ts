@@ -9,6 +9,7 @@ export class Result<T> {
     if (isSuccess && error) {
       throw new Error("InvalidOperation: A result cannot be successful and contain an error");
     }
+    
     if (!isSuccess && !error) {
       throw new Error("InvalidOperation: A failing result needs to contain an error message");
     }

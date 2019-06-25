@@ -35,7 +35,7 @@
     "migrate:dev": "npm run build && cross-env NODE_ENV=development dotenv -e .env sequelize db:migrate",
     "migrate:test": "npm run build && cross-env NODE_ENV=test dotenv -e .env sequelize db:migrate --env test",
     "migrate:prod": "npm run build && cross-env NODE_ENV=production dotenv -e .env sequelize db:migrate --env production",
-    "start:dev": "nodemon",
+    "start:dev": "cross-env NODE_ENV=development nodemon",
     "test": "jest",
     "test:dev": "jest --watch",
     "testWithCoverage": "jest --coverage"

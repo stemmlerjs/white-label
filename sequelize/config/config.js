@@ -21,6 +21,7 @@ module.exports = {
     "database": WHITE_LABEL_DB_NAME,
     "host": WHITE_LABEL_DB_HOST,
     "dialect": "sqlite",
+    "storage": "./database.sqlite"
   },
   "production": {
     "username": WHITE_LABEL_DB_USER,

@@ -12,7 +12,6 @@
     "shallow-equal-object": "^1.1.1",
     "sinon": "^7.3.2",
     "sinon-chai": "^3.3.0",
-    "sqlite3": "^4.0.9",
     "typescript": "^3.5.2"
   },
   "devDependencies": {
@@ -27,9 +26,12 @@
   },
   "scripts": {
     "build": "rimraf ./dist && tsc",
-    "db:create": "node scripts/db/create",
-    "db:delete": "node scripts/db/delete",
-    "db:flush": "npm run db:delete && npm run db:create",
+    "db:create:dev": "cross-env NODE_ENV=development node scripts/db/create",
+    "db:create:test": "cross-env NODE_ENV=test node scripts/db/create",
+    "db:delete:dev": "cross-env NODE_ENV=development node scripts/db/delete",
+    "db:delete:test": "cross-env NODE_ENV=test node scripts/db/delete",
+    "db:flush:dev": "cross-env NODE_ENV=development npm run db:delete:dev && npm run db:create:dev",
+    "db:flush:test": "cross-env NODE_ENV=test npm run db:delete:test && npm run db:create:test",
     "migrate:dev": "npm run build && cross-env NODE_ENV=development dotenv -e .env sequelize db:migrate",
     "migrate:test": "npm run build && cross-env NODE_ENV=test dotenv -e .env sequelize db:migrate --env test",
     "migrate:prod": "npm run build && cross-env NODE_ENV=production dotenv -e .env sequelize db:migrate --env production",

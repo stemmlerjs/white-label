@@ -2,7 +2,7 @@
 import { AggregateRoot } from "../../core/domain/AggregateRoot";
 import { UniqueEntityID } from "../../core/domain/UniqueEntityID";
 import { Result } from "../../core/Result";
-import { UserId } from "../../users/domain/UserId";
+import { UserId } from "../../users/domain/userId";
 
 interface TraderProps {
   userId: UserId;

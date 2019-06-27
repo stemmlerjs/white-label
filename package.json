@@ -37,7 +37,7 @@
     "migrate:prod": "npm run build && cross-env NODE_ENV=production dotenv -e .env sequelize db:migrate --env production",
     "start:dev": "cross-env NODE_ENV=development nodemon",
     "test": "jest",
-    "test:dev": "jest --watch",
+    "test:dev": "jest --watchAll",
     "testWithCoverage": "jest --coverage"
   },
   "repository": {

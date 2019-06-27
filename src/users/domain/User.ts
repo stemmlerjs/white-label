@@ -3,7 +3,7 @@ import { UniqueEntityID } from "../../core/domain/UniqueEntityID";
 import { Result } from "../../core/Result";
 
 interface UserProps {
-
+  
 }
 
 export class User extends AggregateRoot<UserProps> {

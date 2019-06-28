@@ -12,6 +12,14 @@ interface ArtistProps {
 }
 
 export class Artist extends Entity<ArtistProps> {
+  get id(): UniqueEntityID {
+    return this._id;
+  }
+
+  get name (): ArtistName {
+    return this.props.name;
+  }
+  
   private constructor (props: ArtistProps, id?: UniqueEntityID) {
     super(props, id);
   }

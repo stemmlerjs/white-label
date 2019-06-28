@@ -17,6 +17,8 @@ interface VinylProps {
   dateAdded?: Date;
 }
 
+export type VinylCollection = Vinyl[];
+
 export class Vinyl extends AggregateRoot<VinylProps> {
 
   public static MAX_NUMBER_GENRES_PER_VINYL = 3;
@@ -39,6 +41,10 @@ export class Vinyl extends AggregateRoot<VinylProps> {
 
   get dateAdded (): Date {
     return this.props.dateAdded;
+  }
+
+  get traderId (): TraderId {
+    return this.props.traderId;
   }
 
   public addGenre (genre: Genre): void {

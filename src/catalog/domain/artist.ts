@@ -5,6 +5,7 @@ import { Result } from "../../core/Result";
 import { Genre } from "./genre";
 import { Guard } from "../../core/Guard";
 import { ArtistName } from "./artistName";
+import { ArtistId } from "./artistId";
 
 interface ArtistProps {
   name: ArtistName;
@@ -12,12 +13,39 @@ interface ArtistProps {
 }
 
 export class Artist extends Entity<ArtistProps> {
-  get id(): UniqueEntityID {
+  public static MAX_NUMBER_GENRES_PER_ARTIST = 5;
+
+  get id (): UniqueEntityID {
     return this._id;
+  }
+
+  get artistId () : ArtistId {
+    return ArtistId.create(this.id);
   }
 
   get name (): ArtistName {
     return this.props.name;
+  }
+
+  get genres (): Genre[] {
+    return this.props.genres;
+  }
+
+  public addGenre (genre: Genre): void {
+    const maxLengthExceeded = this.props.genres
+      .length >= Artist.MAX_NUMBER_GENRES_PER_ARTIST;
+
+    const alreadyAdded = this.props.genres
+      .find((g) => g.id.equals(genre.id));
+
+    if (!alreadyAdded && !maxLengthExceeded) {
+      this.props.genres.push(genre);
+    }
+  }
+
+  public removeGenre (genre: Genre): void {
+    this.props.genres = this.props.genres
+      .filter((g) => !g.id.equals(genre.id));
   }
   
   private constructor (props: ArtistProps, id?: UniqueEntityID) {

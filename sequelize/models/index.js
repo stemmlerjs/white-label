@@ -16,8 +16,12 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-function makeUpperCaseName (model) {
-  return model.name.substring(0, 1).toUpperCase() + model.name.substring(1)
+function makeUpperCaseName (modelName) {
+  return modelName.substring(0, 1).toUpperCase() + modelName.substring(1)
+}
+
+function toCamelCase (modelName) {
+  return modelName.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
 }
 
 fs
@@ -29,7 +33,7 @@ fs
   })
   .forEach(file => {
     const model = sequelize['import'](path.join(__dirname, file));
-    db[makeUpperCaseName(model)] = model;
+    db[makeUpperCaseName(toCamelCase(model.name))] = model;
   });
 
 Object.keys(db).forEach(modelName => {

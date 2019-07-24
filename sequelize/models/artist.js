@@ -1,6 +1,6 @@
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('artist', {
+  const Artist = sequelize.define('artist', {
     artist_id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -12,19 +12,15 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     }
   },{
-
-    /**
-     * Tell sequelize to add "createdAt" and "updatedAt" columns.
-     */
-
     timestamps: true,
-    
-    /**
-     * Force sequelize to use underscored auto-generated column names.
-     * Therefore: createdAt, updatedAt => created_at, updated_at
-     */
-
     underscored: true, 
     tableName: 'artist'
   });
+
+  Artist.associate = (models) => {
+    Artist.hasMany(models.Album, { foreignKey: 'artist_id', sourceKey: 'artist_id', as: 'Artist' })
+    Artist.belongsToMany(models.Genre, { as: 'ArtistGenres', through: models.TagArtistGenre, foreignKey: 'genre_id'});
+  }
+
+  return Artist;
 };

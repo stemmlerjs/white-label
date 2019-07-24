@@ -14,6 +14,7 @@ import { GenresRepo, IGenresRepo } from "../../../repos/genresRepo";
 import { Genre } from "../../../domain/genre";
 import { Album } from "../../../domain/album";
 import { IAlbumRepo } from "../../../repos/albumRepo";
+import { GenreId } from "../../../domain/genreId";
 
 interface GenresRequestDTO {
   new: string[];
@@ -51,7 +52,10 @@ export class AddVinylToCatalogUseCase implements UseCase<AddVinylToCatalogUseCas
     return (
       await this.genresRepo.findByIds(
         ((ParseUtils.parseObject(artistGenres) as Result<GenresRequestDTO>)
-          .getValue().ids)
+          .getValue().ids.map(
+            (genreId) => GenreId.create(new UniqueEntityID(genreId)
+          )
+        ))
       ))
       .concat(
         ((ParseUtils.parseObject(artistGenres) as Result<GenresRequestDTO>)
@@ -65,7 +69,7 @@ export class AddVinylToCatalogUseCase implements UseCase<AddVinylToCatalogUseCas
     const isArtistIdProvided = TextUtil.isUUID(artistNameOrId);
 
     if (isArtistIdProvided) {
-      const artist = await this.artistRepo.findById(artistNameOrId);
+      const artist = await this.artistRepo.findByArtistId(artistNameOrId);
       const found = !!artist;
 
       if (found) {
@@ -141,7 +145,7 @@ export class AddVinylToCatalogUseCase implements UseCase<AddVinylToCatalogUseCas
 
       // This is where all the magic happens
       await this.vinylRepo.save(vinyl);
-      
+
       return Result.ok<Vinyl>(vinyl)
 
     } catch (err) {

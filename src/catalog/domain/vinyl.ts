@@ -30,6 +30,10 @@ export class Vinyl extends AggregateRoot<VinylProps> {
     return this.props.artist;
   }
 
+  get album (): Album {
+    return this.props.album;
+  }
+
   get dateAdded (): Date {
     return this.props.dateAdded;
   }

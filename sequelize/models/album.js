@@ -18,6 +18,10 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: 'cascade',
       onUpdate: 'cascade',
     },
+    name: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
     year_released: {
       type: DataTypes.INTEGER,
       allowNull: true

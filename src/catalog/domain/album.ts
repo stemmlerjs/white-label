@@ -25,6 +25,10 @@ export class Album extends Entity<AlbumProps> {
     return AlbumId.create(this.id);
   }
 
+  get artistId (): ArtistId {
+    return this.props.artistId;
+  }
+
   get name (): string {
     return this.props.name
   }

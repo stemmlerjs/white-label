@@ -1,6 +1,7 @@
 import { Entity } from "../../core/domain/Entity";
 import { UniqueEntityID } from "../../core/domain/UniqueEntityID";
 import { Result } from "../../core/Result";
+import { GenreId } from "./genreId";
 
 interface GenreProps {
   value: string;
@@ -9,6 +10,14 @@ interface GenreProps {
 export class Genre extends Entity<GenreProps> {
   get id (): UniqueEntityID {
     return this._id;
+  }
+
+  get genreId (): GenreId {
+    return GenreId.create(this.id);
+  }
+
+  get value (): string {
+    return this.props.value;
   }
   
   private constructor (props: GenreProps, id?: UniqueEntityID) {

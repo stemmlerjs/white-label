@@ -37,10 +37,6 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: 'cascade',
       onUpdate: 'cascade'
     },
-    name: {
-      type: DataTypes.STRING(250),
-      allowNull: false
-    },
     notes: {
       type: DataTypes.TEXT,
       allowNull: true

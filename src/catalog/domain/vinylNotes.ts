@@ -8,6 +8,11 @@ interface VinylNotesProps {
 
 export class VinylNotes extends ValueObject<VinylNotesProps> {
   public static NOTES_MAX_LENGTH = 10000;
+  
+  get value (): string {
+    return this.props.html
+  }
+
   private constructor (props: VinylNotesProps) {
     super(props)
   }

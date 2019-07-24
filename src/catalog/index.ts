@@ -6,6 +6,8 @@ import { ArtistRepo } from "./repos/artistRepo";
 const vinylRepo = new VinylRepo(models);
 const artistRepo = new ArtistRepo(models);
 
+console.log('hi')
+
 export {
   vinylRepo,
   artistRepo

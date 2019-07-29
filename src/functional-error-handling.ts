@@ -3,9 +3,21 @@ import { Either, Result, left, right } from "./core/Result";
 import { UseCase } from "./core/domain/UseCase";
 import { BaseController } from "./core/infra/BaseController";
 
+/**
+ * Resources
+ * ============================
+ * 
+ * https://medium.com/inato/expressive-error-handling-in-typescript-and-benefits-for-domain-driven-design-70726e061c86
+ * https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html
+ * https://stackoverflow.com/questions/12739149/typescript-type-signatures-for-functions-with-variable-argument-counts
+ * https://www.typescriptlang.org/docs/handbook/namespaces.html
+ * https://dev.to/_gdelgado/type-safe-error-handling-in-typescript-1p4n
+ * https://stackoverflow.com/questions/36332665/how-to-use-instanceof-in-a-switch-statement
+ */
+
 interface DomainError {
   message: string;
-  value: any;
+  error?: any;
 }
 
 // This is how to many an 'any', number of parameters to an interface
@@ -23,8 +35,7 @@ namespace CreateUserError {
   export class UsernameTakenError extends Result<DomainError> {    
     private constructor (username: string) {
       super(false, {
-        message: `The username ${username} was already taken`,
-        value: ''
+        message: `The username ${username} was already taken`
       })
     }
 
@@ -36,8 +47,7 @@ namespace CreateUserError {
   export class EmailInvalidError extends Result<DomainError> {    
     private constructor (email: string, err?: any) {
       super(false, {
-        message: `The email ${email} was invalid`,
-        value: err
+        message: `The email ${email} was invalid`
       })
     }
 

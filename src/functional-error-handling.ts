@@ -178,6 +178,7 @@ type Response = Either<
   Result<any> // OK 
 >
 
+
 class CreateUserUseCase implements UseCase<Request, Promise<Response>> {
   private userRepo: IUserRepo;
 
@@ -188,22 +189,6 @@ class CreateUserUseCase implements UseCase<Request, Promise<Response>> {
   public async execute (request: Request): Promise<Response> {
 
     const { username, email, password } = request;
-
-    const [userByUsername, userByEmail] = await Promise.all([
-      this.userRepo.getUserByUsername(username),
-      this.userRepo.getUserByEmail(email),
-    ])
-
-    const usernameTaken = !!userByUsername === true;
-    const accountCreated = !!userByEmail === true;
-
-    if (usernameTaken) {
-      return left(CreateUserError.UsernameTakenError.call(username));
-    }
-
-    if (accountCreated) {
-      return left(CreateUserError.EmailInvalidError.call(email));
-    }
 
     const emailOrError = Email.create({ email })
 
@@ -217,7 +202,27 @@ class CreateUserUseCase implements UseCase<Request, Promise<Response>> {
       return left(passwordOrError.value);
     }
 
-    return right(Result.ok())
+    try {
+      const [userByUsername, userByEmail] = await Promise.all([
+        this.userRepo.getUserByUsername(username),
+        this.userRepo.getUserByEmail(email),
+      ])
+  
+      const usernameTaken = !!userByUsername === true;
+      const accountCreated = !!userByEmail === true;
+  
+      if (usernameTaken) {
+        return left(CreateUserError.UsernameTakenError.call(username));
+      }
+  
+      if (accountCreated) {
+        return left(CreateUserError.EmailInvalidError.call(email));
+      }
+  
+      return right(Result.ok())
+    } catch (err) {
+      return left(AppError.UnexpectedError.create(err))
+    }
   }
 }
 

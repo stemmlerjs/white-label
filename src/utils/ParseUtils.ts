@@ -1,5 +1,5 @@
 
-import { Result } from "../core/result";
+import { Result } from "../core/logic/Result";
 
 type ParseDataType = 'number' | 'string' | 'object'
 
@@ -34,10 +34,10 @@ export class ParseUtils {
     try {
       returnData = JSON.parse(raw);
     } catch (err) {
-      return TypedResult.fail(err);
+      return Result.fail(err);
     }
 
-    return TypedResult.ok<any>(returnData);
+    return Result.ok<any>(returnData);
   }
 
   public static parseArray(rawArrayString: any) : ParseArrayConfig {

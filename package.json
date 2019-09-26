@@ -4,6 +4,7 @@
   "description": "A Vinyl-Trading enterprise app built with Node.js + TypeScript using Domain-Driven Design",
   "main": "bin/www",
   "dependencies": {
+    "axios": "^0.19.0",
     "bcrypt-nodejs": "0.0.3",
     "chai": "^4.2.0",
     "dotenv": "^8.0.0",
@@ -17,6 +18,7 @@
     "typescript": "^3.5.2"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/bcrypt-nodejs": "0.0.30",
     "@types/jest": "^24.0.15",
     "cross-env": "^5.2.0",

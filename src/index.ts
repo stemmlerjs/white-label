@@ -1,1 +1,1 @@
-import "./catalog"
+import "./modules/vinyl"

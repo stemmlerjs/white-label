@@ -5,6 +5,7 @@ import { UserEmail } from "../domain/userEmail";
 
 export interface IUserRepo {
   findUserByEmail(email: UserEmail): Promise<User>;
+  findUserByUsername (username: string): Promise<User>;
   exists (email: UserEmail): Promise<boolean>;
   save(user: User): Promise<void>;
 }
@@ -26,6 +27,14 @@ export class UserRepo implements IUserRepo {
     }
   }
 
+  public async findUserByUsername (username: string): Promise<User> {
+    const baseQuery = this.createBaseQuery();
+    baseQuery.where['username'] = username;
+    const user = await this.models.BaseUser.findOne(baseQuery);
+    if (!!user === true) return user;
+    return null;
+  }
+
   public async findUserByEmail(email: UserEmail): Promise<User> {
     const baseQuery = this.createBaseQuery();
     baseQuery.where['user_email'] = email.value.toString();
@@ -42,16 +51,25 @@ export class UserRepo implements IUserRepo {
   }
 
   public async save (user: User): Promise<void> {
+    const BaseUserModel = this.models.BaseUser;
     const exists = await this.exists(user.email);
     const rawUser = UserMap.toPersistence(user);
     
-    if (!exists) {
-      // Create new
-      return null;
-    } 
-    
-    else {
-      // Save old
+    try {
+      if (!exists) {
+        // Create new
+        await BaseUserModel.create(rawUser);
+      } 
+      
+      else {
+        // Save old
+        const sequelizeUserInstance = await BaseUserModel.findOne({ 
+          where: { user_email: user.email.value }
+        })
+        await sequelizeUserInstance.update(rawUser);
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
 }

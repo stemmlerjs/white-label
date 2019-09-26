@@ -16,6 +16,7 @@ interface UserProps {
   profilePicture?: string;
   googleId?: number;
   facebookId?: number;
+  username?: string;
 }
 
 export class User extends AggregateRoot<UserProps> {
@@ -59,6 +60,14 @@ export class User extends AggregateRoot<UserProps> {
     return this.props.facebookId;
   }
 
+  get username (): string {
+    return this.props.username;
+  }
+  
+  set username (value: string) {
+    this.props.username = value;
+  }
+
   private constructor (props: UserProps, id?: UniqueEntityID) {
     super(props, id);
   }
@@ -72,7 +81,7 @@ export class User extends AggregateRoot<UserProps> {
   }
 
   public static create (props: UserProps, id?: UniqueEntityID): Result<User> {
-    
+
     const guardedProps = [
       { argument: props.firstName, argumentName: 'firstName' },
       { argument: props.lastName, argumentName: 'lastName' },
@@ -92,7 +101,8 @@ export class User extends AggregateRoot<UserProps> {
     
     else {
       const user = new User({
-        ...props
+        ...props,
+        username: props.username ? props.username : '',
       }, id);
 
       const idWasProvided = !!id;

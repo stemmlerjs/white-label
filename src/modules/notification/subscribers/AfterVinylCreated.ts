@@ -1,10 +1,10 @@
 
-import { IHandle } from "../../../../core/domain/events/IHandle";
-import { VinylCreatedEvent } from "../../../vinyl/domain/events/vinylCreatedEvent";
-import { DomainEvents } from "../../../../core/domain/events/DomainEvents";
-import { IVinylRepo } from "../../../vinyl/repos/vinylRepo";
+import { IVinylRepo } from "../../vinyl/repos/vinylRepo";
+import { IHandle } from "../../../core/domain/events/IHandle";
+import { VinylCreatedEvent } from "../../vinyl/domain/events/vinylCreatedEvent";
+import { DomainEvents } from "../../../core/domain/events/DomainEvents";
 
-export class VinylCreatedSubscription implements IHandle<VinylCreatedEvent> {
+export class AfterVinylCreated implements IHandle<VinylCreatedEvent> {
   private vinylRepo: IVinylRepo;
 
   constructor () {

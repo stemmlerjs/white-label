@@ -20,6 +20,15 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       unique: true
     },
+    is_email_verified: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    username: {
+      type: DataTypes.STRING(250),
+      allowNull: true
+    },
     user_password: {
       type: DataTypes.STRING,
       allowNull: true,

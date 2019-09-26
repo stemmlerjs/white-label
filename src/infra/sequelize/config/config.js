@@ -45,7 +45,6 @@ module.exports.connection = new Sequelize(database, username, password, {
   port: 3306,
   dialectOptions: {
     multipleStatements: true,
-    useUTC: true,
   },
   pool: {
     max: 5,

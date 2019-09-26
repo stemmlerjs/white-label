@@ -1,6 +1,12 @@
 
 import { AddVinylToCatalogUseCase } from "./addVinylToCatalogUseCase";
-import { vinylRepo, artistRepo } from "../../..";
+import { vinylRepo, genresRepo, artistRepo, albumRepo } from "../../../repos";
 
-const addVinylToCatalogUseCase = new AddVinylToCatalogUseCase(vinylRepo, artistRepo);
+const addVinylToCatalogUseCase = new AddVinylToCatalogUseCase(
+  vinylRepo, artistRepo, genresRepo, albumRepo
+);
+
+export {
+  addVinylToCatalogUseCase
+}
 

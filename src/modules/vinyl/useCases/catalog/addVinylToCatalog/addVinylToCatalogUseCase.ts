@@ -2,7 +2,6 @@
 import { UseCase } from "../../../../../core/domain/UseCase";
 import { Vinyl } from "../../../domain/vinyl";
 import { IVinylRepo } from "../../../repos/vinylRepo";
-import { Result } from "../../../../../core/Result";
 import { TextUtil } from "../../../../../utils/TextUtil";
 import { IArtistRepo } from "../../../repos/artistRepo";
 import { Artist } from "../../../domain/artist";
@@ -15,6 +14,7 @@ import { Genre } from "../../../domain/genre";
 import { Album } from "../../../domain/album";
 import { IAlbumRepo } from "../../../repos/albumRepo";
 import { GenreId } from "../../../domain/genreId";
+import { Result } from "../../../../../core/logic/Result";
 
 interface GenresRequestDTO {
   new: string[];

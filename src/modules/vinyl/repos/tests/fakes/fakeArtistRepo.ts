@@ -1,14 +1,20 @@
 
 import { BaseFakeRepo } from "../../../../../core/tests/BaseFakeRepo";
 import { Artist } from "../../../domain/artist";
-import { ArtistName } from "../../../domain/artistName";
-import { TraderId } from "../../../../trading/domain/traderId";
 import { IArtistRepo } from "../../artistRepo";
 
 export class FakeArtistRepo extends BaseFakeRepo<Artist> implements IArtistRepo {
   
   constructor () {
     super();
+  }
+
+  public findByArtistId (artistId: string): Promise<Artist> {
+    return this.findById(artistId);
+  } 
+  
+  public async removeArtistById (artistId: string): Promise<void> {
+    this._items = this._items.filter((a) => a.id.toString() !== artistId)
   }
 
   public async findById (artistId: string): Promise<Artist> {

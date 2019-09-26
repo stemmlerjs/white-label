@@ -1,9 +1,7 @@
 
-import { BaseController } from "../../../../../infra/http/BaseController";
 import { RegisterWithFacebook } from "./RegisterWithFacebook";
 import { RegisterWithFacebookErrors } from "./RegisterWithFacebookErrors";
-import { JWTToken } from "../../../services/jwtClient";
-import { AccessTokenDTO } from "../../../dtos/AccessTokenDTO";
+import { BaseController } from "../../../../core/infra/BaseController";
 
 export class RegisterWithFacebookController extends BaseController {
   private useCase: RegisterWithFacebook;
@@ -41,11 +39,7 @@ export class RegisterWithFacebookController extends BaseController {
       }
     } else {
 
-      const token = result.value as JWTToken;
-
-      return this.ok<AccessTokenDTO>(this.res, {
-        token
-      });
+      return this.ok(this.res);
     }
   }
 }

@@ -1,9 +1,7 @@
 
-import { BaseController } from "../../../../../infra/http/BaseController";
 import { RegisterWithGoogle } from "./RegisterWithGoogle";
 import { RegisterWithGoogleErrors } from "./RegisterWithGoogleErrors";
-import { JWTToken } from "../../../services/jwtClient";
-import { AccessTokenDTO } from "../../../dtos/AccessTokenDTO";
+import { BaseController } from "../../../../core/infra/BaseController";
 
 export class RegisterWithGoogleController extends BaseController {
   private useCase: RegisterWithGoogle;
@@ -33,11 +31,7 @@ export class RegisterWithGoogleController extends BaseController {
       }
     } else {
 
-      const token = result.value as JWTToken;
-
-      return this.ok<AccessTokenDTO>(this.res, {
-        token
-      });
+      return this.ok(this.res);
     }
   }
 }

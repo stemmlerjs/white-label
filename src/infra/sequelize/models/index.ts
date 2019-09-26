@@ -13,9 +13,7 @@ import * as path from 'path'
 import config from '../config/config'
 import * as Sequelize from 'sequelize'
 
-
-const sequelize = config.db.conn;
-const { connectionStatus } = config.db
+const sequelize = config.connection;
 
 // turns base_user => BaseUser
 function toCamelCase (str) {
@@ -66,13 +64,3 @@ const createModels = () => {
 }
 
 export default createModels();
-
-export function getModels () : Promise<any> {
-  return new Promise((resolve, reject) => {
-    connectionStatus.subscribe((status: boolean) => {
-      if (status) {
-        return resolve(createModels())
-      } 
-    })
-  })
-}

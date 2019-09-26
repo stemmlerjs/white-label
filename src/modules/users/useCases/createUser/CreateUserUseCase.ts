@@ -12,7 +12,7 @@ import { GenericAppError } from "../../../../core/logic/AppError";
 type Response = Either<
   GenericAppError.UnexpectedError |
   CreateUserErrors.AccountAlreadyExists |
-  Result<void>, 
+  Result<any>, 
   Result<void>
 >
 

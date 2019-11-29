@@ -12,7 +12,8 @@ export class AfterVinylCreated implements IHandle<VinylCreatedEvent> {
   }
 
   setupSubscriptions(): void {
-    DomainEvents.register(this.onVinylCreatedEvent.bind(this), VinylCreatedEvent.name);
+    const domainEventsPublisher = DomainEvents.create();
+    domainEventsPublisher.register(this.onVinylCreatedEvent.bind(this), VinylCreatedEvent.name);
   }
 
   private async onVinylCreatedEvent (event: VinylCreatedEvent): Promise<void> {

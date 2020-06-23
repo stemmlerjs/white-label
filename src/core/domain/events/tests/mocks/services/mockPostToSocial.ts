@@ -3,6 +3,8 @@ import { MockJobCreatedEvent } from "../events/mockJobCreatedEvent";
 import { MockJobDeletedEvent } from "../events/mockJobDeletedEvent";
 import { IHandle } from "../../../IHandle";
 import { DomainEvents } from "../../../DomainEvents";
+import { getNamespace } from "cls-hooked";
+import { clsName } from "../../../../../../config";
 
 export class MockPostToSocial implements IHandle<MockJobCreatedEvent>, IHandle<MockJobDeletedEvent> {
   constructor () {
@@ -14,8 +16,9 @@ export class MockPostToSocial implements IHandle<MockJobCreatedEvent>, IHandle<M
    */
 
   setupSubscriptions (): void {
-    DomainEvents.register(this.handleJobCreatedEvent, MockJobCreatedEvent.name);
-    DomainEvents.register(this.handleDeletedEvent, MockJobDeletedEvent.name);
+    const domainEventsPublisher = DomainEvents.create();
+    domainEventsPublisher.register(this.handleJobCreatedEvent, MockJobCreatedEvent.name);
+    domainEventsPublisher.register(this.handleDeletedEvent, MockJobDeletedEvent.name);
   }
 
   /**

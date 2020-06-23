@@ -5,7 +5,8 @@ import { UniqueEntityID } from '../../../core/domain/UniqueEntityID';
 
 const dispatchEventsCallback = (model: any, primaryKeyField: string) => {
   const aggregateId = new UniqueEntityID(model[primaryKeyField]);
-  DomainEvents.dispatchEventsForAggregate(aggregateId);
+  const domainEventsPublisher = DomainEvents.create();
+  domainEventsPublisher.dispatchEventsForAggregate(aggregateId);
 }
 
 (async function createHooksForAggregateRoots () {

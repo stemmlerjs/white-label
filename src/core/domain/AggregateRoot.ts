@@ -20,7 +20,8 @@ export abstract class AggregateRoot<T> extends Entity<T> {
     this._domainEvents.push(domainEvent);
     // Add this aggregate instance to the domain event's list of aggregates who's
     // events it eventually needs to dispatch.
-    DomainEvents.markAggregateForDispatch(this);
+    const domainEventsPublisher = DomainEvents.create();
+    domainEventsPublisher.markAggregateForDispatch(this);
     // Log the domain event
     this.logDomainEventAdded(domainEvent);
   }

@@ -14,7 +14,8 @@ export class AfterUserCreated implements IHandle<UserCreatedEvent> {
   }
 
   setupSubscriptions(): void {
-    DomainEvents.register(this.onUserCreatedEvent.bind(this), UserCreatedEvent.name);
+    const domainEventsPublisher = DomainEvents.create();
+    domainEventsPublisher.register(this.onUserCreatedEvent.bind(this), UserCreatedEvent.name);
   }
 
   private craftSlackMessage (user: User): string {

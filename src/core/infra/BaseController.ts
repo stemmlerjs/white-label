@@ -31,32 +31,32 @@ export abstract class BaseController {
     return res.sendStatus(201);
   }
 
-  public clientError (message?: string) {
-    return BaseController.jsonResponse(this.res, 400, message ? message : 'Unauthorized');
+  public clientError (message = 'Unauthorized') {
+    return BaseController.jsonResponse(this.res, 400, message);
   }
 
-  public unauthorized (message?: string) {
-    return BaseController.jsonResponse(this.res, 401, message ? message : 'Unauthorized');
+  public unauthorized (message = 'Unauthorized') {
+    return BaseController.jsonResponse(this.res, 401, message);
   }
 
-  public paymentRequired (message?: string) {
-    return BaseController.jsonResponse(this.res, 402, message ? message : 'Payment required');
+  public paymentRequired (message = 'Payment required') {
+    return BaseController.jsonResponse(this.res, 402, message);
   }
 
-  public forbidden (message?: string) {
-    return BaseController.jsonResponse(this.res, 403, message ? message : 'Forbidden');
+  public forbidden (message = 'Forbidden') {
+    return BaseController.jsonResponse(this.res, 403, message);
   }
 
-  public notFound (message?: string) {
-    return BaseController.jsonResponse(this.res, 404, message ? message : 'Not found');
+  public notFound (message = 'Not found') {
+    return BaseController.jsonResponse(this.res, 404, message);
   }
 
-  public conflict (message?: string) {
-    return BaseController.jsonResponse(this.res, 409, message ? message : 'Conflict');
+  public conflict (message = 'Conflict') {
+    return BaseController.jsonResponse(this.res, 409, message);
   }
 
-  public tooMany (message?: string) {
-    return BaseController.jsonResponse(this.res, 429, message ? message : 'Too many requests');
+  public tooMany (message = 'Too many requests') {
+    return BaseController.jsonResponse(this.res, 429, message);
   }
 
   public todo () {
